@@ -2,8 +2,6 @@
 
 DevCapsule turns your current coding state into an AI-ready context capsule in one command.
 
-![Demo GIF placeholder](docs/demo-placeholder.gif)
-
 DevCapsule is a local-first CLI and terminal UI for collecting the context developers usually paste by hand into AI coding assistants: Git status, diffs, modified files, project structure, terminal history, clipboard text, dependency files, and environment details. It turns that into a clean Markdown file you can paste into ChatGPT, Claude, Cursor, Codex, or any other assistant.
 
 ## Installation
@@ -19,6 +17,24 @@ Then run:
 ```bash
 devcapsule
 ```
+
+## Linux Packaging
+
+Build a Debian package in Docker:
+
+```bash
+docker build -f packaging/debian/Dockerfile -t devcapsule-deb-builder .
+docker run --rm -v "$PWD/dist:/out" devcapsule-deb-builder
+```
+
+Install the generated package on a Debian-like system with Python 3.12+:
+
+```bash
+sudo apt install ./dist/devcapsule_0.1.0_amd64.deb
+devcapsule doctor
+```
+
+The `.deb` installs a self-contained PEX app under `/opt/devcapsule` and exposes `/usr/bin/devcapsule`.
 
 ## CLI Usage
 
